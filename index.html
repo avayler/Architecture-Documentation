@@ -7,6 +7,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@5/dist/themes/core.min.css">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@5/dist/themes/addons/core-dark.min.css" media="(prefers-color-scheme: dark)" />
+  <style>
+    @media (prefers-color-scheme: dark) {
+      /* 1. Force a solid white canvas wrapper around the diagram */
+      body .mermaid, 
+      body pre.mermaid {
+        background-color: #ffffff !important;
+        padding: 16px;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        overflow-x: auto; /* Prevents overflow clipping on small screens */
+      }
+
+      /* 2. Ensure the generated SVG itself doesn't inherit a transparent background */
+      body .mermaid svg {
+        background-color: #ffffff !important;
+      }
+    }
+	
+	.markdown-section {
+		width: 1280px;
+	}
+  </style>
 </head>
 <body class="loading sidebar-toggle-chevron sidebar-chevron-right sidebar-group-underline">
   <div id="app"></div>
@@ -19,11 +41,35 @@
 	  subMaxLevel: 2,
 	  autoHeader: true,
       nativeEmoji: true,
-	  auto2top: true
+	  auto2top: true,
+	  mermaid: {
+	    startOnLoad: true,
+	    theme: 'default', // keeps standard light color-scheme with white background,
+		themeVariables: {
+		  background: '#ffffff'
+		}
+	  },
+	  planyuml: {
+		  skin: 'default'
+	  }
     }
   </script>
   <!-- Docsify resource -->
   <script src="//cdn.jsdelivr.net/npm/docsify@5/dist/docsify.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify@5/dist/plugins/search.min.js"></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true });
+    window.mermaid = mermaid;
+  </script>
+  <script src="//unpkg.com/docsify-mermaid@2.0.1/dist/docsify-mermaid.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-tabs/dist/docsify-tabs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+  <script src="//cdn.jsdelivr.net/npm/docsify-latex@0"></script>
+  <script src="//unpkg.com/docsify-plantuml/dist/docsify-plantuml.min.js"></script>
 </body>
 </html>
