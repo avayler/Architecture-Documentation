@@ -7,7 +7,8 @@ N.B. Draw.IO Diagrams are exported as jpg and embedded in markdown as images unt
 [Avayler Architecture & Platform Governance Confluence Space](https://totd-ci.atlassian.net/wiki/spaces/ASG/pages/472645652/Onboarding+Overview)
 
 [Global Glossary, Terms and Ubiquitous Language](Glossary-Ubiquitous-Language.md)
-## Architecture
+
+### Architecture
 
 What are we aiming for? We should minimize the cost of implementation / maintenance and evolution while maximising the business value delivered (… ROI)
 
