@@ -1,0 +1,23 @@
+flowchart LR
+    Staff[Workshop staff and technicians]
+    Customers[Customers and fleet users]
+    Partners[Retail, fleet, ERP and industry partners]
+    Web[React POS, POS and Admin web app]
+    BFF[Node.js web backend / BFF]
+    API[Amazon API Gateway]
+    Services[.NET business microservices on AWS Lambda]
+    Events[Event bus and queues]
+    Data[(RDS transactional data)]
+    Files[(S3 documents and objects)]
+    Observability[CloudWatch logs, metrics and traces]
+
+    Staff --> Web
+    Customers --> Web
+    Partners --> API
+    Web --> BFF --> API
+    API --> Services
+    Services --> Data
+    Services --> Files
+    Services --> Events
+    Events --> Services
+    Services --> Observability
