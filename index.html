@@ -28,6 +28,10 @@
 	.markdown-section {
 		width: 1280px;
 	}
+	
+	.app-name-link img {
+		background-color: #FFF;
+	}
   </style>
 </head>
 <body class="loading sidebar-toggle-chevron sidebar-chevron-right sidebar-group-underline">
@@ -35,6 +39,7 @@
   <script>
     window.$docsify = {
       name: 'Avayler Architecture Documentation',
+	  logo: 'https://www.avayler.com/hubfs/Avayler%20logo.svg',
       repo: 'https://github.com/avayler/Architecture-Documentation',
 	  homepage: 'README.md',
 	  loadSidebar: true,
@@ -49,9 +54,26 @@
 		  background: '#ffffff'
 		}
 	  },
-	  planyuml: {
+	  plantuml: {
 		  skin: 'default'
-	  }
+	  },
+	  plugins: [
+		function (hook, vm) {
+		  hook.beforeEach(html => {
+			url = 'https://github.com/avayler/Architecture-Documentation/blob/main/' + vm.route.file;
+
+			const footerHTML = [
+			  '<hr>',
+			  '<div style="display: flex; align-items: center; justify-content: space-between;">',
+			  '  <span>Powered by <a href="/">Docsify.js</a></span>',
+			  `  <a href="${url}" style="display: inline-flex; align-items: center; gap: 0.25em;" target="_blank">:memo: Edit Page</a>`,
+			  '</div>',
+			].join('\n');
+
+			return html + footerHTML;
+		  });
+		}
+	  ]
     }
   </script>
   <!-- Docsify resource -->
