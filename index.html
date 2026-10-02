@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@5/dist/themes/core.min.css">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@5/dist/themes/addons/core-dark.min.css" media="(prefers-color-scheme: dark)" />
   <style>
-    @media (prefers-color-scheme: dark) {
+		@media (prefers-color-scheme: dark) {
       /* 1. Force a solid white canvas wrapper around the diagram */
       body .mermaid, 
       body pre.mermaid {
@@ -25,13 +25,13 @@
       }
     }
 	
-	.markdown-section {
-		width: 1280px;
-	}
+		.markdown-section {
+			width: 1280px;
+		}
 	
-	.app-name-link img {
-		background-color: #FFF;
-	}
+		.app-name-link img {
+			background-color: #FFF;
+		}
   </style>
 </head>
 <body class="loading sidebar-toggle-chevron sidebar-chevron-right sidebar-group-underline">
@@ -39,42 +39,41 @@
   <script>
     window.$docsify = {
       name: 'Avayler Architecture Documentation',
-	  logo: 'https://www.avayler.com/hubfs/Avayler%20logo.svg',
+	  	logo: 'https://www.avayler.com/hubfs/Avayler%20logo.svg',
       repo: 'https://github.com/avayler/Architecture-Documentation',
-	  homepage: 'README.md',
-	  loadSidebar: true,
-	  subMaxLevel: 2,
-	  autoHeader: true,
+	  	homepage: 'README.md',
+	  	loadSidebar: true,
+	  	subMaxLevel: 2,
+	  	autoHeader: true,
       nativeEmoji: true,
-	  auto2top: true,
-	  mermaid: {
-	    startOnLoad: true,
-	    theme: 'default', // keeps standard light color-scheme with white background,
-		themeVariables: {
-		  background: '#ffffff'
-		}
-	  },
-	  plantuml: {
-		  skin: 'default'
-	  },
-	  plugins: [
-		function (hook, vm) {
-		  hook.beforeEach(html => {
-			url = 'https://github.com/avayler/Architecture-Documentation/blob/main/' + vm.route.file;
+	  	auto2top: true,
+	  	mermaid: {
+	    	startOnLoad: true,
+				theme: 'default', // keeps standard light color-scheme with white background,
+				themeVariables: {
+		  		background: '#ffffff'
+				}
+	  	},
+	  	plantuml: {
+		  	skin: 'default'
+	  	},
+	  	plugins: [
+				function (hook, vm) {
+		  		hook.beforeEach(html => {
+						url = 'https://github.com/avayler/Architecture-Documentation/blob/main/' + vm.route.file;
 
-			const footerHTML = [
-			  '<hr>',
-			  '<div style="display: flex; align-items: center; justify-content: space-between;">',
-			  '  <span>Powered by <a href="/">Docsify.js</a></span>',
-			  `  <a href="${url}" style="display: inline-flex; align-items: center; gap: 0.25em;" target="_blank">:memo: Edit Page</a>`,
-			  '</div>',
-			].join('\n');
+						const footerHTML = [
+			  			'<hr>',
+			  			'<div style="display: flex; align-items: center; justify-content: space-between;">',
+			  			'  <span>Powered by <a href="https://docsify.js.org/">Docsify.js</a></span>',
+			  			`  <a href="${url}" style="display: inline-flex; align-items: center; gap: 0.25em;" target="_blank">:memo: Edit Page</a>`,
+			  			'</div>',
+						].join('\n');
 
-			return html + footerHTML;
-		  });
-		}
-	  ]
-    }
+						return html + footerHTML;
+		  		});
+				}
+    ]};
   </script>
   <!-- Docsify resource -->
   <script src="//cdn.jsdelivr.net/npm/docsify@5/dist/docsify.min.js"></script>
@@ -89,9 +88,76 @@
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-tabs/dist/docsify-tabs.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+  <script src="//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-latex@0"></script>
   <script src="//unpkg.com/docsify-plantuml/dist/docsify-plantuml.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-drawio/viewer.min.js"></script>
+  <script>
+    (function () {
+      const XML_ESCAPES = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#x27;", "`": "&#x60;" };
+
+      window.drawioConverter = function (xml, idx = new Date().getTime()) {
+        let mxGraphData = {
+        editable: false,
+        highlight: "#0000ff",
+        nav: false,
+        toolbar: null,
+        edit: false,
+        lightbox: "open",
+        xml
+        };
+
+        const json = JSON.stringify(mxGraphData).replace(/[&<>"'`]/g, (ch) => XML_ESCAPES[ch]);
+
+        return `<div class="drawio-viewer-index-${idx}">
+          <div class="mxgraph" style="max-width: 100%; border: 1px solid transparent" data-mxgraph="${json}"></div>
+        </div>
+        `;
+      };
+
+      const install = function (hook) {
+        hook.doneEach((hook) => {
+            try {
+                window.GraphViewer.processElements();
+            } catch {}
+        });
+      };
+
+
+
+    // Set styles to prevent Docsify styles from interfering with the diagram
+    const styles = function (hook) {
+        hook.afterEach((html) => {
+            const ds = `
+                <style>
+                    .mxgraph * {
+                        all: revert-layer;
+                    }
+
+                    .geDiagramContainer * {
+                        all: revert-layer;
+                    }
+                </style>`;
+
+            return html + ds;
+        });
+    };
+
+      // Add drawioConverter() as the renderer for "drawio" code blocks
+      window.$docsify.markdown = {
+        renderer: {
+            code({ text, lang }) {
+                //alert(lang);
+                if (lang === 'drawio') {
+                    return window.drawioConverter(text);
+                }
+                return this.origin.code.apply(this, arguments);
+            }
+        }
+      };
+
+      window.$docsify.plugins = [].concat($docsify.plugins || [], install, styles);
+    })();
+  </script>
 </body>
 </html>

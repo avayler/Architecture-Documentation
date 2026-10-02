@@ -12,3 +12,5 @@
 	- [Operational Processes](Architecture-Overview/Processes/Operational%20Processes.md)
 	- [Scheduling Processes](Architecture-Overview/Processes/Scheduling%20Processes.md)
 	- [Work Order Processing](Architecture-Overview/Processes/Work%20Order%20Processing.md)
+
+- [Glossary & Ubiquitous Language](Glossary-Ubiquitous-Language.md)

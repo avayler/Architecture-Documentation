@@ -1,10 +1,6 @@
-# Avayler Platform Documentation - Architecture
+﻿# Avayler Platform Documentation - Architecture
 
 Platform documentation repository.  Diagrams are supplied in raw as either [Draw.IO (SVG)](https://www.drawio.com/), [Mermaid](https://mermaid.js.org/) or [PlantUML](https://plantuml.com/).  Modelling is done using the [C4 Model](https://c4model.com/).
-
-N.B. Draw.IO Diagrams are exported as jpg and embedded in markdown as images until Azure Devops is capable of rendering svg inline like other markdown consumers.
-
-[Avayler Architecture & Platform Governance Confluence Space](https://totd-ci.atlassian.net/wiki/spaces/ASG/pages/472645652/Onboarding+Overview)
 
 [Global Glossary, Terms and Ubiquitous Language](Glossary-Ubiquitous-Language.md)
 
@@ -50,3 +46,39 @@ All of the above should allow the flexibility to adapt the system over it’s li
 5. Short Delivery Cycles 
 6. Stakeholder Feedback 
 7. Monitor-Control Loop
+
+### Mermaid
+
+```mermaid
+flowchart LR
+	Start[The start point]
+	End[The end point]
+	
+	Start --> End
+```
+
+### PlantUML
+
+```plantuml
+@startuml
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+
+Alice -> Bob: Another authentication Request
+Alice <-- Bob: another authentication Response
+@enduml
+```
+
+### Draw.IO Usage
+
+[filename](/example.drawio ':include :type=code')
+
+### LaTeX
+
+Boxed Equation
+
+$$
+E=mc^2
+$$
+
+Inlilne = $ E=mc^2 $
