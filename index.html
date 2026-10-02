@@ -109,7 +109,7 @@
 
         const json = JSON.stringify(mxGraphData).replace(/[&<>"'`]/g, (ch) => XML_ESCAPES[ch]);
 
-        return `<div class="drawio-viewer-index-${idx}">
+        return `<div class="drawio-viewer-index-${idx}" style="background-color: #fff;">
           <div class="mxgraph" style="max-width: 100%; border: 1px solid transparent" data-mxgraph="${json}"></div>
         </div>
         `;
